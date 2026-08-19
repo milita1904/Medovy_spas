@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Медовое предсказание</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(160deg, #fff8df, #f8d36b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    color: #5b3b08;
+}
+
+.card {
+    width: 100%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 28px;
+    padding: 30px 22px;
+    text-align: center;
+    box-shadow: 0 12px 40px rgba(100,70,10,0.2);
+}
+
+.bee {
+    font-size: 55px;
+    margin-bottom: 5px;
+}
+
+h1 {
+    margin: 5px 0 10px;
+    font-size: 30px;
+}
+
+.subtitle {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 25px;
+}
+
+input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #e7bd43;
+    border-radius: 14px;
+    font-size: 17px;
+    outline: none;
+    text-align: center;
+    margin-bottom: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 14px;
+    background: #d99a16;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#result {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background: #fff4c7;
+    border-radius: 18px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.name {
+    font-weight: bold;
+    color: #b77700;
+}
+
+.honey {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="bee">🐝</div>
+
+    <h1>Медовое предсказание</h1>
+
+    <div class="subtitle">
+        Введи своё имя и узнай,<br>
+        что приготовила для тебя судьба 🍯
+    </div>
+
+    <input 
+        type="text" 
+        id="name" 
+        placeholder="Введите ваше имя"
+        autocomplete="off"
+    >
+
+    <button onclick="getPrediction()">
+        🍯 Узнать предсказание
+    </button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+const predictions = [
+    "Вскоре тебя ждёт приятная новость, которая поднимет настроение.",
+    "Твоя добрая идея совсем скоро принесёт неожиданный результат.",
+    "Впереди встреча, которая оставит после себя тёплые воспоминания.",
+    "Скоро удача окажется именно на твоей стороне.",
+    "Тебя ждёт маленькое чудо, которое придёт совершенно неожиданно.",
+    "В ближайшее время исполнится одно твоё небольшое желание.",
+    "Твоя энергия привлечёт новых людей и интересные возможности.",
+    "Скоро ты получишь повод улыбнуться без особой причины.",
+    "То, о чём ты давно думаешь, начнёт постепенно становиться реальностью.",
+    "Тебя ждёт день, наполненный радостью, теплом и приятными сюрпризами.",
+    "В этом году у тебя появится возможность попробовать что-то совершенно новое.",
+    "Судьба готовит для тебя сладкий поворот событий.",
+    "Твоё терпение скоро будет вознаграждено.",
+    "Совсем скоро ты услышишь слова, которые давно хотела услышать.",
+    "Там, где ты сейчас видишь сомнения, скоро появится ясность."
+];
+
+function getPrediction() {
+
+    const nameInput = document.getElementById("name");
+    const result = document.getElementById("result");
+
+    const name = nameInput.value.trim();
+
+    if (name === "") {
+        alert("Пожалуйста, сначала введи своё имя 🐝");
+        nameInput.focus();
+        return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * predictions.length);
+
+    const prediction = predictions[randomIndex];
+
+    result.style.display = "block";
+
+    result.innerHTML =
+        '<div class="honey">🍯</div>' +
+        '<div><span class="name">' + escapeHTML(name) + '</span>, твоё предсказание:</div>' +
+        '<br>' +
+        '<div>' + prediction + '</div>';
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
+
+function escapeHTML(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+</script>
+
+</body>
+</html>
